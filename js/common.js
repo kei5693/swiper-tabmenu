@@ -8,9 +8,6 @@ var swiper = new Swiper("#tabContent", {
 var _target         = $('#tabTitle');
 var _targetList     = _target.find('> ul > li');
 var _selectedIdx    = 0;
-var _pos            = 0;
-var _posCenter      = window.outerWidth / 2;
-var _calcPosValue   = 0;
 
 // 최초 로드 시 탭 타이틀 0번째에 class 활성화
 swiperEvent(_selectedIdx);
@@ -29,6 +26,10 @@ _targetList.on('click', '> a', function(e){
 
 // 인덱스를 받아서 실행하는 함수를 스와이퍼, 탭 타이틀 양쪽에 사용
 function swiperEvent(index){
+  var _posCenter      = window.outerWidth / 2;
+  var _pos            = 0;
+  var _calcPosValue   = 0;
+  
   // 인덱스에 맞는 탭 타이틀 class 활성화
   $(_targetList[index]).addClass('active').siblings('li').removeClass('active');
 
