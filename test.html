@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>swiper tabMenu</title>
+	<link rel="stylesheet" rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" rel="stylesheet" href="./css/common.css">
+	<!-- <link rel="stylesheet" rel="stylesheet" href="./css/swiper-bundle.min.css"> -->
+	<!-- <script type="text/javascript" src="./js/jquery-3.6.0.min.js"></script> -->
+	<!-- <script type="text/javascript" src="./js/swiper-bundle.min.js"></script> -->
+	<link rel="stylesheet" href="./swiper.min.css">
+  <script src="./jquery.js"></script>
+  <script src="./swiper.min.js"></script>
+
+	<style>
+    .snbSwiper { max-width:420px; padding: 0 3px;box-sizing: border-box;background: powderblue; }
+    .snbSwiper .swiper-slide { width: auto !important; }
+    .snbSwiper .swiper-slide a { display: block; text-align: center; }
+    .snbSwiper .swiper-slide .text { margin: 0 5px; padding: 16px 5px 8px 5px; box-sizing: border-box; position: relative; display: inline-block; height: 47px; white-space: nowrap; font-size: 1rem; line-height: 1em; color: #333; }
+    .snbSwiper .on .text { color: #1b64bc; font-weight: bold; }
+    .snbSwiper .on .text:after { content: ''; display: block; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #1b64bc; }
+  </style>
+</head>
+
+<body>
+
+	<div id="wrapper">
+		<!-- <div id="tabTitle">
+			<ul>
+				<li><a href="#">캐시백 최대 96%</a></li>
+				<li><a href="#">원하는 좌석이 0원</a></li>
+				<li><a href="#">할인 쿠폰</a></li>
+				<li><a href="#">일정 변경 무료</a></li>
+				<li><a href="#">무게 걱정 없는 국내 여행</a></li>
+				<li><a href="#">특가 운임은 내가 먼저</a></li>
+			</ul>
+		</div> -->
+
+		<div class="swiper-container snbSwiper">
+			<div class="swiper-wrapper">
+					<div class="swiper-slide"><a href="#"><span class="text">캐시백 최대 96%</span></a></div>
+					<div class="swiper-slide"><a href="#"><span class="text">원하는 좌석이 0원</span></a></div>
+					<div class="swiper-slide"><a href="#"><span class="text">할인 쿠폰</span></a></div>
+					<div class="swiper-slide"><a href="#"><span class="text">일정 변경 무료</span></a></div>
+					<div class="swiper-slide"><a href="#"><span class="text">무게 걱정 없는 국내 여행</span></a></div>
+					<div class="swiper-slide"><a href="#"><span class="text">특가 운임은 내가 먼저</span></a></div>
+				</div>
+			</div>
+			
+		<div class="swiper" id="tabContent">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">캐시백 최대 96%</div>
+				<div class="swiper-slide">원하는 좌석이 0원</div>
+				<div class="swiper-slide">할인 쿠폰</div>
+				<div class="swiper-slide">일정 변경 무료</div>
+				<div class="swiper-slide">무게 걱정 없는 국내 여행</div>
+				<div class="swiper-slide">특가 운임은 내가 먼저</div>
+			</div>
+			<div class="swiper-pagination"></div>
+		</div>
+	</div>
+
+	<script src="./js/common.js"></script>
+
+	<script>
+    var swiper = new Swiper('.snbSwiper', {
+      slidesPerView: 'auto',
+      preventClicks: true,
+      preventClicksPropagation: false,
+      observer: true,
+      observeParents: true
+    });
+
+    var $snbSwiperItem = $('.snbSwiper .swiper-wrapper .swiper-slide a');
+
+    $snbSwiperItem.on('click', function () {
+      var target = $(this).parent();
+      $snbSwiperItem.parent().removeClass('on');
+      target.addClass('on');
+      muCenter(target);
+    });
+
+    function muCenter(target) {
+      var snbwrap = $('.snbSwiper .swiper-wrapper');
+      var targetPos = target.position();
+      var box = $('.snbSwiper');
+      var boxHarf = box.width() / 2;
+      var pos;
+      var listWidth = 0;
+
+      snbwrap.find('.swiper-slide').each(function () {
+        listWidth += $(this).outerWidth();
+      });
+
+      var selectTargetPos = targetPos.left + target.outerWidth() / 2;
+      if (selectTargetPos <= boxHarf) { // left
+        pos = 0;
+      } else if ((listWidth - selectTargetPos) <= boxHarf) { //right
+        pos = listWidth - box.width();
+      } else {
+        pos = selectTargetPos - boxHarf;
+      }
+
+      setTimeout(function () {
+        snbwrap.css({
+          "transform": "translate3d(" + (pos * -1) + "px, 0, 0)",
+          "transition-duration": "300ms"
+        });
+      }, 200);
+    }
+
+    // watchOverflow: true,
+    // slidesPerView: 'auto',
+    // freeMode: true,
+  </script>
+
+</body>
+
+</html>
