@@ -14,8 +14,8 @@
   display: flex;
   white-space: nowrap;
   padding: 10px 0;
-  transform: translateX(0);
-  transition: transform 0.5s;
+  /* transform: translateX(0); */
+  /* transition: transform 0.5s; */
 }
 #tabTitle > ul > li {
   padding: 0 15px;
